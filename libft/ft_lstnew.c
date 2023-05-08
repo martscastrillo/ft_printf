@@ -1,15 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: martcast <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: martcast <martcast@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/25 20:38:51 by martcast          #+#    #+#             */
-/*   Updated: 2023/04/25 20:38:54 by martcast         ###   ########.fr       */
+/*   Created: 2023/04/10 18:05:10 by martcast          #+#    #+#             */
+/*   Updated: 2023/04/10 18:05:13 by martcast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "libft.h"
+t_list *ft_lstnew(void *content)
+{
+    t_list *tmp;
 
-
-int ft_printf(char const *, ...){
+    tmp = malloc(sizeof(t_list));
+    if(!tmp)
+        return (NULL);
+     tmp->content = content;
+        tmp->next = NULL;
+    return (tmp);
 }
