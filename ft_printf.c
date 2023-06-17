@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 #include <unistd.h>
 #include <stdarg.h>
+#include <stdio.h>
 
 int ft_strlen(const char *str)
 {
@@ -42,16 +43,6 @@ void ft_putnbr(int n)
         ft_putnbr(n / 10);
     
     ft_putchar((n % 10) + '0');
-}
-
-void ft_puthex(unsigned int n, int uppercase)
-{
-    const char *hex_chars = uppercase ? "0123456789ABCDEF" : "0123456789abcdef";
-    
-    if (n >= 16)
-        ft_puthex(n / 16, uppercase);
-    
-    ft_putchar(hex_chars[n % 16]);
 }
 
 int ft_printf(const char *format, ...)
@@ -88,9 +79,10 @@ int ft_printf(const char *format, ...)
             else if (*str == 'p')
             {
                 void *p = va_arg(args, void*);
-                ft_putstr("0x");
-                ft_puthex((unsigned int)p, 0);
-                printed_chars += 2 + sizeof(void*) * 2;
+                char buffer[20];
+                sprintf(buffer, "%p", p);
+                ft_putstr(buffer);
+                printed_chars += ft_strlen(buffer);
             }
             else if (*str == 'd' || *str == 'i')
             {
@@ -130,7 +122,7 @@ int ft_printf(const char *format, ...)
             else if (*str == 'x')
             {
                 unsigned int x = va_arg(args, unsigned int);
-                ft_puthex(x, 0);
+                ft_putnbr(x);
                 
                 // Calcular la cantidad de dígitos hexadecimales impresos
                 int temp = x;
@@ -146,7 +138,7 @@ int ft_printf(const char *format, ...)
             else if (*str == 'X')
             {
                 unsigned int X = va_arg(args, unsigned int);
-                ft_puthex(X, 1);
+                ft_putnbr(X);
                 
                 // Calcular la cantidad de dígitos hexadecimales impresos
                 int temp = X;
@@ -173,7 +165,6 @@ int ft_printf(const char *format, ...)
     
     return printed_chars;
 }
-
 #include <stdio.h>
 
 int main (void){
