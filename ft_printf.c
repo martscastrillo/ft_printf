@@ -9,8 +9,9 @@
 /*   Updated: 2023/04/25 20:38:54 by martcast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include <unistd.h>
+#include <stdarg.h>
 
-#include "ft_printf.h"
 int ft_strlen(const char *str)
 {
     int len = 0;
@@ -43,6 +44,16 @@ void ft_putnbr(int n)
     ft_putchar((n % 10) + '0');
 }
 
+void ft_puthex(unsigned int n, int uppercase)
+{
+    const char *hex_chars = uppercase ? "0123456789ABCDEF" : "0123456789abcdef";
+    
+    if (n >= 16)
+        ft_puthex(n / 16, uppercase);
+    
+    ft_putchar(hex_chars[n % 16]);
+}
+
 int ft_printf(const char *format, ...)
 {
     va_list args;
@@ -57,14 +68,31 @@ int ft_printf(const char *format, ...)
         {
             str++;
             
-            // Manejar los modificadores de formato compatibles (%s y %d)
-            if (*str == 's')
+            if (*str == '%')
+            {
+                ft_putchar('%');
+                printed_chars++;
+            }
+            else if (*str == 'c')
+            {
+                unsigned char c = (unsigned char)va_arg(args, int);
+                write(1, &c, 1);
+                printed_chars++;
+            }
+            else if (*str == 's')
             {
                 char *s = va_arg(args, char*);
                 ft_putstr(s);
                 printed_chars += ft_strlen(s);
             }
-            else if (*str == 'd')
+            else if (*str == 'p')
+            {
+                void *p = va_arg(args, void*);
+                ft_putstr("0x");
+                ft_puthex((unsigned int)p, 0);
+                printed_chars += 2 + sizeof(void*) * 2;
+            }
+            else if (*str == 'd' || *str == 'i')
             {
                 int d = va_arg(args, int);
                 ft_putnbr(d);
@@ -83,10 +111,53 @@ int ft_printf(const char *format, ...)
                 
                 printed_chars += digit_count;
             }
-            else
+            else if (*str == 'u')
             {
-                ft_putchar('%');
-                printed_chars++;
+                unsigned int u = va_arg(args, unsigned int);
+                ft_putnbr(u);
+                
+                // Calcular la cantidad de dígitos impresos
+                int temp = u;
+                int digit_count = 0;
+                while (temp != 0)
+                {
+                    temp /= 10;
+                    digit_count++;
+                }
+                
+                printed_chars += digit_count;
+            }
+            else if (*str == 'x')
+            {
+                unsigned int x = va_arg(args, unsigned int);
+                ft_puthex(x, 0);
+                
+                // Calcular la cantidad de dígitos hexadecimales impresos
+                int temp = x;
+                int digit_count = 0;
+                while (temp != 0)
+                {
+                    temp /= 16;
+                    digit_count++;
+                }
+                
+                printed_chars += digit_count;
+            }
+            else if (*str == 'X')
+            {
+                unsigned int X = va_arg(args, unsigned int);
+                ft_puthex(X, 1);
+                
+                // Calcular la cantidad de dígitos hexadecimales impresos
+                int temp = X;
+                int digit_count = 0;
+                while (temp != 0)
+                {
+                    temp /= 16;
+                    digit_count++;
+                }
+                
+                printed_chars += digit_count;
             }
         }
         else
@@ -102,7 +173,6 @@ int ft_printf(const char *format, ...)
     
     return printed_chars;
 }
-
 
 #include <stdio.h>
 
@@ -120,17 +190,18 @@ int main (void){
 	
 	printf("frase: %s letra:%c\n", s, c);
 	ft_printf("frase: %s letra:%c printf\n", s, c);
+
 	printf("puntero:%p \n", &s);
 	ft_printf("puntero:%p printf\n", &s);
+
 	printf("nb = %d  o %i\n", nb, nb);
 	ft_printf("nb = %d  o %i printf\n", nb, nb);
+
 	printf("Sin signo: %u\n", un);
 	ft_printf("Sin signo: %u printf\n", un);
+	
 	printf("Hexa: %x    %X\n", nb, nb);
 	ft_printf("Hexa: %x   %X printf\n", nb, nb);
-
-	 ft_printf("Hello, %s!\n", "world");
-    ft_printf("The answer is %d.\n", 42);
     
 	return (0);
 }
