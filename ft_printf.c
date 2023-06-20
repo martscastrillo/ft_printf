@@ -13,25 +13,25 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-int ft_strlen(const char *str)
+/* int ft_strlen(const char *str)
 {
     int len = 0;
     while (str[len] != '\0')
         len++;
     return len;
-}
+} */
 
-void ft_putchar(char c)
+/* void ft_putchar(char c)
 {
     write(1, &c, 1);
 }
-
-void ft_putstr(const char *str)
+ */
+/* void ft_putstr(const char *str)
 {
     write(1, str, ft_strlen(str));
-}
+} */
 
-void ft_putnbr(int n)
+/* void ft_putnbr(int n)
 {
     if (n < 0)
     {
@@ -44,7 +44,7 @@ void ft_putnbr(int n)
     
     ft_putchar((n % 10) + '0');
 }
-
+ */
 int ft_printf(const char *format, ...)
 {
     va_list args;
@@ -165,34 +165,5 @@ int ft_printf(const char *format, ...)
     
     return printed_chars;
 }
-#include <stdio.h>
 
-int main (void){
-   
-    char c;
-	char *s;
-	int nb;
-	unsigned int un;
 
-	c = 'f';
-	s = "blablabla";
-	nb = -10;
-	un = 9454999;
-	
-	printf("frase: %s letra:%c\n", s, c);
-	ft_printf("frase: %s letra:%c printf\n", s, c);
-
-	printf("puntero:%p \n", &s);
-	ft_printf("puntero:%p printf\n", &s);
-
-	printf("nb = %d  o %i\n", nb, nb);
-	ft_printf("nb = %d  o %i printf\n", nb, nb);
-
-	printf("Sin signo: %u\n", un);
-	ft_printf("Sin signo: %u printf\n", un);
-	
-	printf("Hexa: %x    %X\n", nb, nb);
-	ft_printf("Hexa: %x   %X printf\n", nb, nb);
-    
-	return (0);
-}
