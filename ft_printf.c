@@ -45,6 +45,10 @@
     ft_putchar((n % 10) + '0');
 }
  */
+int ft_strlen(const char *str);
+void ft_putchar(char c);
+void ft_putstr(const char *str);
+void ft_putnbr(int n);
 int ft_printf(const char *format, ...)
 {
     va_list args;

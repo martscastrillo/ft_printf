@@ -1,4 +1,6 @@
 #include <stdio.h>
+
+int ft_printf(const char *format, ...);
 int main (void){
    
     char c;
