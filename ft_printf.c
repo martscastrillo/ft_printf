@@ -13,38 +13,6 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-/* int ft_strlen(const char *str)
-{
-    int len = 0;
-    while (str[len] != '\0')
-        len++;
-    return len;
-} */
-
-/* void ft_putchar(char c)
-{
-    write(1, &c, 1);
-}
- */
-/* void ft_putstr(const char *str)
-{
-    write(1, str, ft_strlen(str));
-} */
-
-/* void ft_putnbr(int n)
-{
-    if (n < 0)
-    {
-        ft_putchar('-');
-        n = -n;
-    }
-    
-    if (n >= 10)
-        ft_putnbr(n / 10);
-    
-    ft_putchar((n % 10) + '0');
-}
- */
 int ft_strlen(const char *str);
 void ft_putchar(char c);
 void ft_putstr(const char *str);
