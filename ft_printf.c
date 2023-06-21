@@ -49,6 +49,113 @@ int ft_strlen(const char *str);
 void ft_putchar(char c);
 void ft_putstr(const char *str);
 void ft_putnbr(int n);
+
+#include <stdarg.h>
+#include <stdio.h>
+#include <unistd.h>
+
+
+void ft_print_char(va_list args, int *printed_chars)
+{
+    unsigned char c = (unsigned char)va_arg(args, int);
+    write(1, &c, 1);
+    (*printed_chars)++;
+}
+
+void ft_print_string(va_list args, int *printed_chars)
+{
+    char *s = va_arg(args, char*);
+    ft_putstr(s);
+    (*printed_chars) += ft_strlen(s);
+}
+
+void ft_print_pointer(va_list args, int *printed_chars)
+{
+    void *p = va_arg(args, void*);
+    char buffer[20];
+    sprintf(buffer, "%p", p);
+    ft_putstr(buffer);
+    (*printed_chars) += ft_strlen(buffer);
+}
+
+void ft_print_integer(va_list args, int *printed_chars)
+{
+    int d = va_arg(args, int);
+    ft_putnbr(d);
+    if (d < 0)
+        (*printed_chars)++; 
+    int temp = d;
+    int digit_count = 0;
+    while (temp != 0)
+    {
+        temp /= 10;
+        digit_count++;
+    }
+    (*printed_chars) += digit_count;
+}
+
+void ft_print_unsigned_integer(va_list args, int *printed_chars)
+{
+    unsigned int u = va_arg(args, unsigned int);
+    ft_putnbr(u);
+    int temp = u;
+    int digit_count = 0;
+    while (temp != 0)
+    {
+        temp /= 10;
+        digit_count++;
+    }
+    (*printed_chars) += digit_count;
+}
+
+void ft_print_hexadecimal(va_list args, int *printed_chars)
+{
+    unsigned int x = va_arg(args, unsigned int);
+    ft_putnbr(x);
+    int temp = x;
+    int digit_count = 0;
+    while (temp != 0)
+    {
+        temp /= 16;
+        digit_count++;
+    }
+    (*printed_chars) += digit_count;
+}
+void ft_handle_percent(const char **str, int *printed_chars)
+{
+    ft_putchar('%');
+    (*printed_chars)++;
+    (*str)++;
+}
+void ft_handle_format_specifier(const char **str, va_list args, int *printed_chars)
+{
+    (*str)++;
+    
+    if (**str == 'c')
+    {
+        ft_print_char(args, printed_chars);
+    }
+    else if (**str == 's')
+    {
+        ft_print_string(args, printed_chars);
+    }
+    else if (**str == 'p')
+    {
+        ft_print_pointer(args, printed_chars);
+    }
+    else if (**str == 'd' || **str == 'i')
+    {
+        ft_print_integer(args, printed_chars);
+    }
+    else if (**str == 'u')
+    {
+        ft_print_unsigned_integer(args, printed_chars);
+    }
+    else if (**str == 'x' || **str == 'X')
+    {
+        ft_print_hexadecimal(args, printed_chars);
+    }
+}
 int ft_printf(const char *format, ...)
 {
     va_list args;
@@ -59,91 +166,9 @@ int ft_printf(const char *format, ...)
     
     while (*str != '\0')
     {
-        if (*str == '%')
+         if (*str == '%')
         {
-            str++;
-            
-            if (*str == '%')
-            {
-                ft_putchar('%');
-                printed_chars++;
-            }
-            else if (*str == 'c')
-            {
-                unsigned char c = (unsigned char)va_arg(args, int);
-                write(1, &c, 1);
-                printed_chars++;
-            }
-            else if (*str == 's')
-            {
-                char *s = va_arg(args, char*);
-                ft_putstr(s);
-                printed_chars += ft_strlen(s);
-            }
-            else if (*str == 'p')
-            {
-                void *p = va_arg(args, void*);
-                char buffer[20];
-                sprintf(buffer, "%p", p);
-                ft_putstr(buffer);
-                printed_chars += ft_strlen(buffer);
-            }
-            else if (*str == 'd' || *str == 'i')
-            {
-                int d = va_arg(args, int);
-                ft_putnbr(d);
-                if (d < 0)
-                    printed_chars++; 
-                int temp = d;
-                int digit_count = 0;
-                while (temp != 0)
-                {
-                    temp /= 10;
-                    digit_count++;
-                }
-                
-                printed_chars += digit_count;
-            }
-            else if (*str == 'u')
-            {
-                unsigned int u = va_arg(args, unsigned int);
-                ft_putnbr(u);
-                int temp = u;
-                int digit_count = 0;
-                while (temp != 0)
-                {
-                    temp /= 10;
-                    digit_count++;
-                }
-                printed_chars += digit_count;
-            }
-            else if (*str == 'x')
-            {
-                unsigned int x = va_arg(args, unsigned int);
-                ft_putnbr(x);
-                int temp = x;
-                int digit_count = 0;
-                while (temp != 0)
-                {
-                    temp /= 16;
-                    digit_count++;
-                }
-                
-                printed_chars += digit_count;
-            }
-            else if (*str == 'X')
-            {
-                unsigned int X = va_arg(args, unsigned int);
-                ft_putnbr(X);
-                int temp = X;
-                int digit_count = 0;
-                while (temp != 0)
-                {
-                    temp /= 16;
-                    digit_count++;
-                }
-                printed_chars += digit_count;
-            }
+            ft_handle_percent(&str, &printed_chars);
         }
         else
         {
@@ -155,5 +180,3 @@ int ft_printf(const char *format, ...)
     va_end(args);
     return printed_chars;
 }
-
-
