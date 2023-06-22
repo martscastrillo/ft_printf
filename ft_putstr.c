@@ -3,7 +3,9 @@
 #include <stdio.h>
 size_t	ft_strlen(const char *s);
 
-void ft_putstr(const char *str)
+int ft_putstr(const char *str)
 {
-    write(1, str, ft_strlen(str));
+    return(write(1, str, ft_strlen(str)));
 }
+
+// write devuelve la cantidad de caracteres que imprimes

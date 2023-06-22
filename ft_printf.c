@@ -13,6 +13,10 @@
 #include <stdarg.h>
 #include <stdio.h>
 
+int ft_putchar(char c);
+int ft_putstr(const char *str);
+void ft_putnbr(int n);
+size_t	ft_strlen(const char *s);
 
 int ft_printf(const char *format, ...)
 {
@@ -29,21 +33,16 @@ int ft_printf(const char *format, ...)
             str++;
             
             if (*str == '%')
-            {
-                ft_putchar('%');
-                printed_chars++;
-            }
+                printed_chars += ft_putchar('%');
             else if (*str == 'c')
             {
                 unsigned char c = (unsigned char)va_arg(args, int);
-                write(1, &c, 1);
-                printed_chars++;
+                printed_chars += write(1, &c, 1);
             }
             else if (*str == 's')
             {
                 char *s = va_arg(args, char*);
-                ft_putstr(s);
-                printed_chars += ft_strlen(s);
+                printed_chars += ft_putstr(s);
             }
             else if (*str == 'p')
             {
