@@ -16,6 +16,9 @@
 # include <unistd.h>
 
 int	ft_printf(char const *str, ...);
-
+void ft_putchar(char c);
+void ft_putstr(const char *str);
+void ft_putnbr(int n);
+size_t	ft_strlen(const char *s);
 
 #endif
