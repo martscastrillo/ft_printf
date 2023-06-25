@@ -55,8 +55,6 @@ int ft_printf(const char *format, ...)
             {
                 int d = va_arg(args, int);
                 ft_putnbr(d);
-                
-                // Calcular la cantidad de dígitos impresos
                 if (d < 0)
                     printed_chars++; // tener en cuenta el signo '-' en números negativos
                 
@@ -74,8 +72,6 @@ int ft_printf(const char *format, ...)
             {
                 unsigned int u = va_arg(args, unsigned int);
                 ft_putnbr(u);
-                
-                // Calcular la cantidad de dígitos impresos
                 int temp = u;
                 int digit_count = 0;
                 while (temp != 0)
@@ -83,15 +79,12 @@ int ft_printf(const char *format, ...)
                     temp /= 10;
                     digit_count++;
                 }
-                
                 printed_chars += digit_count;
             }
             else if (*str == 'x')
             {
                 unsigned int x = va_arg(args, unsigned int);
                 ft_putnbr(x);
-                
-                // Calcular la cantidad de dígitos hexadecimales impresos
                 int temp = x;
                 int digit_count = 0;
                 while (temp != 0)
@@ -106,8 +99,6 @@ int ft_printf(const char *format, ...)
             {
                 unsigned int X = va_arg(args, unsigned int);
                 ft_putnbr(X);
-                
-                // Calcular la cantidad de dígitos hexadecimales impresos
                 int temp = X;
                 int digit_count = 0;
                 while (temp != 0)
