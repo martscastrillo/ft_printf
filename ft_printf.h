@@ -21,4 +21,13 @@ int ft_putstr(const char *str);
 void ft_putnbr(int n);
 size_t	ft_strlen(const char *s);
 
+int ft_print_percent();
+int ft_print_char(va_list args);
+int ft_print_string(va_list args);
+int ft_print_pointer(va_list args);
+int ft_print_integer(va_list args);
+int ft_print_unsigned(va_list args);
+int ft_print_hexadecimal(va_list args);
+int ft_print_hexadecimal_upper(va_list args);
+
 #endif
