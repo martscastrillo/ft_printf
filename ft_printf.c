@@ -18,8 +18,6 @@ int ft_putstr(const char *str);
 void ft_putnbr(int n);
 size_t	ft_strlen(const char *s);
 
-
-
 int ft_print_percent();
 int ft_print_char(va_list args);
 int ft_print_string(va_list args);
@@ -29,13 +27,10 @@ int ft_print_unsigned(va_list args);
 int ft_print_hexadecimal(va_list args);
 int ft_print_hexadecimal_upper(va_list args);
 
-
-
 int ft_printf(const char *format, ...)
 {
     va_list args;
     va_start(args, format);
-    
     int printed_chars = 0;
     const char *str = format;
     
@@ -44,7 +39,6 @@ int ft_printf(const char *format, ...)
         if (*str == '%')
         {
             str++;
-            
             if (*str == '%')
                 printed_chars += ft_print_percent();
             else if (*str == 'c')
@@ -67,11 +61,8 @@ int ft_printf(const char *format, ...)
             ft_putchar(*str);
             printed_chars++;
         }
-        
         str++;
     }
-    
     va_end(args);
-    
     return printed_chars;
 }

@@ -81,13 +81,11 @@ int ft_print_hexadecimal_upper(va_list args)
     char buffer[20];
     sprintf(buffer, "%X", X);
     ft_putstr(buffer);
-    
     int digit_count = 0;
     while (X != 0)
     {
         X /= 16;
         digit_count++;
     }
-    
     return digit_count;
 }
