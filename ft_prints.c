@@ -37,7 +37,6 @@ int ft_print_integer(va_list args)
     int printed_chars = 0;
     if (d < 0)
         printed_chars++; // tener en cuenta el signo '-' en números negativos
-    
     int temp = d;
     int digit_count = 0;
     while (temp != 0)
@@ -45,7 +44,6 @@ int ft_print_integer(va_list args)
         temp /= 10;
         digit_count++;
     }
-    
     return printed_chars + digit_count;
 }
 
@@ -60,7 +58,6 @@ int ft_print_unsigned(va_list args)
         temp /= 10;
         digit_count++;
     }
-    
     return digit_count;
 }
 int ft_print_hexadecimal(va_list args)
@@ -69,14 +66,12 @@ int ft_print_hexadecimal(va_list args)
     char buffer[20];
     sprintf(buffer, "%x", x);
     ft_putstr(buffer);
-    
     int digit_count = 0;
     while (x != 0)
     {
         x /= 16;
         digit_count++;
     }
-    
     return digit_count;
 }
 
