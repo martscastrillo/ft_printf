@@ -44,7 +44,7 @@ int	ft_print_pointer(va_list args)
 	void	*p;
 	char	buffer[20];
 
-	*p = va_arg(args, void *);
+	p = va_arg(args, void *);
 	sprintf(buffer, "%p", p);
 	return (ft_putstr(buffer));
 }
@@ -77,7 +77,7 @@ int	ft_print_unsigned(va_list args)
 	int				temp;
 	int				digit_count;
 
-	u = va_args(args, unsigned int);
+	u = va_arg(args, unsigned int);
 	temp = u;
 	digit_count = 0;
 	ft_putnbr(u);
