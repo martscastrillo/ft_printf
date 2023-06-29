@@ -33,10 +33,13 @@ int	ft_print_char(va_list args)
 
 int	ft_print_string(va_list args)
 {
-	char	*s;
+	 char *s;
 
-	s = va_arg(args, char *);
-	return (ft_putstr(s));
+    s = va_arg(args, char *);
+    if (s == NULL) {
+        s = "(null)";
+    }
+    return ft_putstr(s);
 }
 
 int	ft_print_pointer(va_list args)
@@ -59,10 +62,21 @@ int	ft_print_integer(va_list args)
 	d = va_arg(args, int);
 	ft_putnbr(d);
 	printed_chars = 0;
-	if (d < 0)
+	digit_count = 0;
+	if (d == 0)
+    {
+        ft_putchar('0');
+		printed_chars = 1;
+    }
+	else if (d < -2147483648)
+    {
+        ft_putnbr(d);
+        digit_count = 10;
+        printed_chars += digit_count;
+    }
+	else if (d < 0)
 		printed_chars++;
 	temp = d;
-	digit_count = 0;
 	while (temp != 0)
 	{
 		temp /= 10;

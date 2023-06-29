@@ -13,6 +13,9 @@
 #include <stdarg.h>
 #include <stdio.h>
 
+#include "ft_printf.h"
+
+
 int		ft_putchar(char c);
 int		ft_putstr(const char *str);
 void	ft_putnbr(int n);
