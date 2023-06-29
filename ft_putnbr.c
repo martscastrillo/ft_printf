@@ -6,19 +6,20 @@
 /*   By: martcast <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:41 by martcast          #+#    #+#             */
-/*   Updated: 2023/06/29 10:46:46 by martcast         ###   ########.fr       */
+/*   Updated: 2023/06/29 11:33:23 by martcast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void ft_putchar(char c);
-void ft_putnbr(int n)
+void	ft_putchar(char c);
+
+void	ft_putnbr(int n)
 {
-    if (n < 0)
-    {
-        ft_putchar('-');
-        n = -n;
-    }
-    if (n >= 10)
-        ft_putnbr(n / 10);
-    ft_putchar((n % 10) + '0');
+	if (n < 0)
+	{
+		ft_putchar('-');
+		n = -n;
+	}
+	if (n >= 10)
+		ft_putnbr(n / 10);
+	ft_putchar((n % 10) + '0');
 }

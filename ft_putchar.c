@@ -6,14 +6,15 @@
 /*   By: martcast <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:46:27 by martcast          #+#    #+#             */
-/*   Updated: 2023/06/29 10:46:30 by martcast         ###   ########.fr       */
+/*   Updated: 2023/06/29 11:30:02 by martcast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdarg.h>
 #include <stdio.h>
-int ft_putchar(char c)
+
+int	ft_putchar(char c)
 {
-    return (write(1, &c, 1));
+	return (write(1, &c, 1));
 }
