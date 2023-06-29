@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: martcast <martcast@student.42madrid>       +#+  +:+       +#+        */
+/*   By: martcast <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/15 09:50:58 by martcast          #+#    #+#             */
-/*   Updated: 2023/03/15 10:27:00 by martcast         ###   ########.fr       */
+/*   Created: 2023/06/29 10:47:53 by martcast          #+#    #+#             */
+/*   Updated: 2023/06/29 10:47:55 by martcast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-/* DESCRIPCIÓN
- * La función strlen() toma un único argumento en forma de string.
- * VALOR DEVUELTO
- * Devuelve un entero con la longitud del string.*/
-/* #include "libft.h" */
+
+
 # include <string.h>
 # include <stdio.h>
 # include <unistd.h> 
