@@ -20,7 +20,6 @@ int		ft_putchar(char c);
 int		ft_putstr(const char *str);
 void	ft_putnbr(int n);
 size_t	ft_strlen(const char *s);
-int		ft_print_percent(void);
 int		ft_print_char(va_list args);
 int		ft_print_string(va_list args);
 int		ft_print_pointer(va_list args);
@@ -29,22 +28,10 @@ int		ft_print_unsigned(va_list args);
 int		ft_print_hexadecimal(va_list args);
 int		ft_print_hexadecimal_upper(va_list args);
 
-int	ft_printf(const char *format, ...)
+int conditions(char *str, int printed_chars, va_list args)
 {
-	va_list		args;
-	int			printed_chars;
-	char		*str;
-
-	va_start(args, format);
-	printed_chars = 0;
-	str = (char*)format; 
-	while (*str != '\0')
-	{
-		if (*str == '%')
-		{
-			str++;
-			if (*str == '%')
-				printed_chars += ft_print_percent();
+	if (*str == '%')
+				printed_chars += ft_putchar('%');
 			else if (*str == 'c')
 				printed_chars += ft_print_char(args);
 			else if (*str == 's')
@@ -59,6 +46,23 @@ int	ft_printf(const char *format, ...)
 				printed_chars += ft_print_hexadecimal(args);
 			else if (*str == 'X')
 				printed_chars += ft_print_hexadecimal_upper(args);
+	return printed_chars;
+}
+int	ft_printf(const char *format, ...)
+{
+	va_list		args;
+	int			printed_chars;
+	char		*str;
+
+	va_start(args, format);
+	printed_chars = 0;
+	str = (char*)format; 
+	while (*str != '\0')
+	{
+		if (*str == '%')
+		{
+			str++;
+			conditions(str, printed_chars, args);
 		}
 		else
 		{

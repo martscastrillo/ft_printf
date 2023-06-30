@@ -26,6 +26,7 @@ int	ft_putchar(char c)
 {
 	return (write(1, &c, 1));
 }
+// write devuelve la cantidad de caracteres que imprimes
 
 void	ft_putnbr(int n)
 {
