@@ -18,10 +18,6 @@ int		ft_putstr(const char *str);
 void	ft_putnbr(int n);
 size_t	ft_strlen(const char *s);
 
-int	ft_print_percent(void)
-{
-	return (ft_putchar('%'));
-}	
 
 int	ft_print_char(va_list args)
 {

@@ -6,7 +6,7 @@
 /*   By: martcast <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 20:38:51 by martcast          #+#    #+#             */
-/*   Updated: 2023/06/29 11:02:00 by martcast         ###   ########.fr       */
+/*   Updated: 2023/06/30 12:12:17 by martcast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -14,7 +14,6 @@
 #include <stdio.h>
 
 #include "ft_printf.h"
-
 
 int		ft_putchar(char c);
 int		ft_putstr(const char *str);
@@ -28,26 +27,27 @@ int		ft_print_unsigned(va_list args);
 int		ft_print_hexadecimal(va_list args);
 int		ft_print_hexadecimal_upper(va_list args);
 
-int conditions(char *str, int printed_chars, va_list args)
+int	conditions(char *str, int printed_chars, va_list args)
 {
 	if (*str == '%')
-				printed_chars += ft_putchar('%');
-			else if (*str == 'c')
-				printed_chars += ft_print_char(args);
-			else if (*str == 's')
-				printed_chars += ft_print_string(args);
-			else if (*str == 'p')
-				printed_chars += ft_print_pointer(args);
-			else if (*str == 'd' || *str == 'i')
-				printed_chars += ft_print_integer(args);
-			else if (*str == 'u')
-				printed_chars += ft_print_unsigned(args);
-			else if (*str == 'x')
-				printed_chars += ft_print_hexadecimal(args);
-			else if (*str == 'X')
-				printed_chars += ft_print_hexadecimal_upper(args);
-	return printed_chars;
+		printed_chars += ft_putchar('%');
+	else if (*str == 'c')
+		printed_chars += ft_print_char(args);
+	else if (*str == 's')
+		printed_chars += ft_print_string(args);
+	else if (*str == 'p')
+		printed_chars += ft_print_pointer(args);
+	else if (*str == 'd' || *str == 'i')
+		printed_chars += ft_print_integer(args);
+	else if (*str == 'u')
+		printed_chars += ft_print_unsigned(args);
+	else if (*str == 'x')
+		printed_chars += ft_print_hexadecimal(args);
+	else if (*str == 'X')
+		printed_chars += ft_print_hexadecimal_upper(args);
+	return (printed_chars);
 }
+
 int	ft_printf(const char *format, ...)
 {
 	va_list		args;
@@ -56,7 +56,7 @@ int	ft_printf(const char *format, ...)
 
 	va_start(args, format);
 	printed_chars = 0;
-	str = (char*)format; 
+	str = (char *)format;
 	while (*str != '\0')
 	{
 		if (*str == '%')
