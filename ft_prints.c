@@ -89,6 +89,9 @@ int	ft_print_unsigned(va_list args)
 	temp = u;
 	digit_count = 0;
 	ft_putnbr(u);
+	 if (u == 0) {
+        return 1;
+    }
 	while (temp != 0)
 	{
 		temp /= 10;
