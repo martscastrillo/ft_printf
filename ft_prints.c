@@ -59,18 +59,16 @@ int	ft_print_integer(va_list args)
 	ft_putnbr(d);
 	printed_chars = 0;
 	digit_count = 0;
-	if (d == 0)
-    {
-        ft_putchar('0');
-		printed_chars = 1;
+	 if (d == 0) {
+        return 1;
     }
-	else if (d < -2147483648)
-    {
-        ft_putnbr(d);
-        digit_count = 10;
-        printed_chars += digit_count;
-    }
+	else if (d <= -2147483648)
+	{
+		printed_chars++;
+        return 11;
+	}
 	else if (d < 0)
+	
 		printed_chars++;
 	temp = d;
 	while (temp != 0)
