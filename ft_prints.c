@@ -9,7 +9,7 @@
 /*   Updated: 2023/06/29 11:29:11 by martcast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include <unistd.h>
+/* #include <unistd.h>
 #include <stdarg.h>
 #include <stdio.h>
 
@@ -135,3 +135,4 @@ int	ft_print_hexadecimal_upper(va_list args)
 	}
 	return (digit_count);
 }
+ */

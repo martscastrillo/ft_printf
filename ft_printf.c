@@ -10,60 +10,57 @@
 /*                                                                            */
 /* ************************************************************************** */
 # include <stdarg.h>
- #include <stdio.h>
-
- #include "ft_printf.h"
-
-
- int		ft_putchar(char c);
- int		ft_putstr(const char *str);
- void	ft_putnbr(int n);
-size_t	ft_strlen(const char *s);
-int		ft_print_percent(void);
-int		ft_print_char(va_list args);
-int		ft_print_string(va_list args);
-int		ft_print_pointer(va_list args);
-int		ft_print_integer(va_list args);
-int		ft_print_unsigned(va_list args);
-int		ft_print_hexadecimal(va_list args);
-int		ft_print_hexadecimal_upper(va_list args);
-int	ft_printf(const char *format, ...)
+# include <unistd.h>
+int	ft_printf(char const *str, ...);
+int	ft_putchar(char c);
+int	ft_putstr(char *str);
+int	ft_putnbr(int nb);
+int	ft_ptr(unsigned long long nb);
+int	ft_unsigned_len(unsigned int nb);
+int	ft_unsigned(unsigned int nb);
+int	ft_hex(unsigned int nb, char format);
+int	ft_formats(va_list args, char format)
 {
-	va_list		args;
-	int			printed_chars;
-	char		*str;
-	va_start(args, format);
-	printed_chars = 0;
-	str = (char*)format; 
-	while (*str != '\0')
+	int	len;
+
+	len = 0;
+	if (format == 'c')
+		len += ft_putchar(va_arg(args, int));
+	if (format == 's')
+		len += ft_putstr(va_arg(args, char *));
+	if (format == 'p')
+		len += ft_ptr(va_arg(args, unsigned long long));
+	if (format == 'i' || format == 'd')
+		len += ft_putnbr(va_arg(args, int));
+	if (format == 'u')
+		len += ft_unsigned(va_arg(args, unsigned int));
+	if (format == 'x' || format == 'X')
+		len += (ft_hex(va_arg(args, unsigned int), format));
+	if (format == '%')
+		len += ft_putchar('%');
+	return (len);
+}
+
+int	ft_printf(char const *str, ...)
+{
+	int		i;
+	int		len;
+	va_list	args;
+
+	i = 0;
+	len = 0;
+	va_start(args, str);
+	while (str[i] != '\0')
 	{
-		if (*str == '%')
+		if (str[i] == '%')
 		{
-			str++;
-			if (*str == '%')
-				printed_chars += ft_putchar('%');
-			else if (*str == 'c')
-				printed_chars += ft_print_char(args);
-			else if (*str == 's')
-				printed_chars += ft_print_string(args);
-			else if (*str == 'p')
-				printed_chars += ft_print_pointer(args);
-			else if (*str == 'd' || *str == 'i')
-				printed_chars += ft_print_integer(args);
-			else if (*str == 'u')
-				printed_chars += ft_print_unsigned(args);
-			else if (*str == 'x')
-				printed_chars += ft_print_hexadecimal(args);
-			else if (*str == 'X')
-				printed_chars += ft_print_hexadecimal_upper(args);
+			i++;
+			len += ft_formats(args, str[i]);
 		}
 		else
-		{
-			ft_putchar(*str);
-			printed_chars++;
-		}
-		str++;
+			len += ft_putchar(str[i]);
+			i++;
 	}
 	va_end(args);
-	return (printed_chars);
+	return (len);
 }
