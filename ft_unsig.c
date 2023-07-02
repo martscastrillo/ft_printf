@@ -13,6 +13,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 int	ft_printf(char const *str, ...);
 int	ft_putchar(char c);
 int	ft_putstr(char *str);
@@ -51,8 +52,6 @@ int	ft_unsigned(unsigned int nb)
 		ft_putchar(nb + '0');
 	return (len);
 }
-
-
 
 static int	ft_hex_len(unsigned int nb)
 {

@@ -9,8 +9,10 @@
 /*   Updated: 2023/06/30 12:12:17 by martcast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-# include <stdarg.h>
-# include <unistd.h>
+
+#include <stdarg.h>
+#include <unistd.h>
+
 int	ft_printf(char const *str, ...);
 int	ft_putchar(char c);
 int	ft_putstr(char *str);
@@ -19,6 +21,7 @@ int	ft_ptr(unsigned long long nb);
 int	ft_unsigned_len(unsigned int nb);
 int	ft_unsigned(unsigned int nb);
 int	ft_hex(unsigned int nb, char format);
+
 int	ft_formats(va_list args, char format)
 {
 	int	len;
